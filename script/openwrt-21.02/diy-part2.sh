@@ -23,10 +23,6 @@ sed -i "s/root::0:0:99999:7:::/root:"'$'"1"'$'"pSFNodTy"'$'"ej92Jju6QPD9AIAuelgn
 sed -i "9 i\uci set network.wan1=interface\nuci set network.wan1.proto='dhcp'\nuci set network.wan1.device='eth1'\nuci set network.wan2=interface\nuci set network.wan2.proto='dhcp'\nuci set network.wan2.device='wwan0'\nuci set network.wan3=interface\nuci set network.wan3.proto='dhcp'\nuci set network.wan3.device='usb0'\nuci commit network\n" package/emortal/default-settings/files/99-default-settings
 sed -i "20 i\uci add_list firewall.@zone[1].network='wan1'\nuci add_list firewall.@zone[1].network='wan2'\nuci add_list firewall.@zone[1].network='wan3'\nuci commit firewall\n" package/emortal/default-settings/files/99-default-settings
 
-# Add luci-theme-tano (default)
-svn co https://github.com/lynxnexy/luci-theme-tano/trunk package/luci-theme-tano
-sed -i "s/+luci-theme-bootstrap //" feeds/luci/collections/luci/Makefile
-
 # Set banner
 rm -rf ./package/emortal/default-settings/files/openwrt_banner
 svn export https://github.com/lynxnexy/openwrt/trunk/include/common-files/rootfs/etc/banner package/emortal/default-settings/files/openwrt_banner
@@ -37,20 +33,26 @@ sed -i "s/\/bin\/ash/\/usr\/bin\/zsh/g" package/base-files/files/etc/passwd
 # Set php7 max_size
 sed -i -e "s/upload_max_filesize = 2M/upload_max_filesize = 1024M/g" -e "s/post_max_size = 8M/post_max_size = 1024M/g" feeds/packages/lang/php7/files/php.ini
 
+# Add luci-theme-tano (default themes)
+svn co https://github.com/lynxnexy/packages/trunk/luci-theme-tano package/luci-theme-tano
+sed -i "s/+luci-theme-bootstrap //" feeds/luci/collections/luci/Makefile
+
 # Add luci-app-3ginfo
-svn co https://github.com/lynxnexy/luci-app-3ginfo/trunk package/luci-app-3ginfo
+svn co https://github.com/lynxnexy/packages/trunk/3ginfo package/3ginfo
+svn co https://github.com/lynxnexy/packages/trunk/luci-app-3ginfo package/luci-app-3ginfo
 
 # Add luci-app-atinout-mod
-svn co https://github.com/lynxnexy/luci-app-atinout-mod/trunk package/luci-app-atinout-mod
+svn co https://github.com/lynxnexy/packages/trunk/atinout package/atinout
+svn co https://github.com/lynxnexy/packages/trunk/luci-app-atinout-mod package/luci-app-atinout-mod
 
 # Add luci-app-amlogic
-svn co https://github.com/lynxnexy/luci-app-amlogic/trunk package/luci-app-amlogic
+svn co https://github.com/lynxnexy/packages/trunk/luci-app-amlogic package/luci-app-amlogic
+
+# Add luci-app-tinyfilemanager
+svn co https://github.com/lynxnexy/packages/trunk/luci-app-tinyfilemanager package/luci-app-tinyfilemanager
 
 # Add p7zip
 svn co https://github.com/hubutui/p7zip-lede/trunk package/p7zip
-
-# Add luci-app-tinyfilemanager
-svn co https://github.com/lynxnexy/luci-app-tinyfilemanager/trunk package/luci-app-tinyfilemanager
 
 # Add luci-app-adguardhome
 # svn co https://github.com/rufengsuixing/luci-app-adguardhome/trunk package/luci-app-adguardhome
