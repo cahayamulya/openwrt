@@ -64,8 +64,11 @@ svn co https://github.com/hubutui/p7zip-lede/trunk package/p7zip
 # chmod +x files/usr/bin/AdGuardHome/AdGuardHome
 
 # Add luci-app-openclash
-# rm -rf feeds/luci/applications/luci-app-openclash
-# svn co https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash package/luci-app-openclash
+rm -rf feeds/luci/applications/luci-app-openclash
+svn co https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash package/luci-app-openclash
+pushd package/luci-app-openclash/tools/po2lmo
+make && sudo make install
+popd
 
 # Set clash-core
 mkdir -p files/etc/openclash/core
@@ -105,9 +108,9 @@ sed -i '94s/80/90/g' package/luci-app-openclash/luasrc/controller/openclash.lua
 sed -i '94 i\	entry({"admin", "services", "openclash", "editor"}, template("openclash/editor"),_("Config Editor"), 80).leaf = true' package/luci-app-openclash/luasrc/controller/openclash.lua
 
 # Set yt-dlp
-mkdir -p files/bin
-curl -sL https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o files/bin/yt-dlp
-chmod +x files/bin/yt-dlp
+# mkdir -p files/bin
+# curl -sL https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o files/bin/yt-dlp
+# chmod +x files/bin/yt-dlp
 
 # Set speedtest
 mkdir -p files/bin
