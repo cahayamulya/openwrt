@@ -108,9 +108,9 @@ sed -i '94s/80/90/g' package/luci-app-openclash/luasrc/controller/openclash.lua
 sed -i '94 i\	entry({"admin", "services", "openclash", "editor"}, template("openclash/editor"),_("Config Editor"), 80).leaf = true' package/luci-app-openclash/luasrc/controller/openclash.lua
 
 # Set yt-dlp
-# mkdir -p files/bin
-# curl -sL https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o files/bin/yt-dlp
-# chmod +x files/bin/yt-dlp
+mkdir -p files/bin
+curl -sL https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o files/bin/yt-dlp
+chmod +x files/bin/yt-dlp
 
 # Set speedtest
 mkdir -p files/bin
