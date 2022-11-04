@@ -73,7 +73,7 @@ jobs:
 
       - name: Build OpenWrt firmware
         if: ${{ steps.down.outputs.status }} == 'success' && !cancelled()
-        uses: lynxnexy/OpenWrt@main
+        uses: lynxnexy/openwrt@main
         with:
           openwrt_path: openwrt/bin/targets/*/*/*rootfs.tar.gz
           openwrt_soc: ${{ github.event.inputs.openwrt_soc }}
