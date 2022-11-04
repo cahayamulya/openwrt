@@ -64,9 +64,6 @@ svn co https://github.com/lynxnexy/luci-app-tinyfilemanager/trunk package/luci-a
 # Add luci-app-openclash
 rm -rf feeds/luci/applications/luci-app-openclash
 svn co https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash package/luci-app-openclash
-pushd package/luci-app-openclash/tools/po2lmo
-make && sudo make install
-popd
 
 # Set clash-core
 mkdir -p files/etc/openclash/core
