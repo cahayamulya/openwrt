@@ -64,8 +64,8 @@ svn co https://github.com/hubutui/p7zip-lede/trunk package/p7zip
 # chmod +x files/usr/bin/AdGuardHome/AdGuardHome
 
 # Add luci-app-openclash
-rm -rf feeds/luci/applications/luci-app-openclash
-svn co https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash package/luci-app-openclash
+# rm -rf feeds/luci/applications/luci-app-openclash
+# svn co https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash package/luci-app-openclash
 
 # Set clash-core
 mkdir -p files/etc/openclash/core
