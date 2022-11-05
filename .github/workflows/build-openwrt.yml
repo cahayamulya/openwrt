@@ -30,7 +30,7 @@ on:
       openwrt_size:
         description: "Set the rootfs size(Unit: MiB)."
         required: false
-        default: "1536"
+        default: "960"
 
 env:
   REPO_URL: https://github.com/immortalwrt/immortalwrt
