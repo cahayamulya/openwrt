@@ -25,7 +25,7 @@ on:
       auto_kernel:
         description: "Auto use the latest kernel"
         required: false
-        default: false
+        default: true
         type: boolean
       openwrt_size:
         description: "Set the rootfs size(Unit: MiB)."
