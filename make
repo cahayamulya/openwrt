@@ -32,7 +32,7 @@ build_openwrt=(
 # Set OpenWrt firmware size (Unit: MiB, SKIP_MB >= 4, BOOT_MB >= 256, ROOT_MB >= 512)
 SKIP_MB="68"
 BOOT_MB="256"
-ROOT_MB="1536"
+ROOT_MB="960"
 #
 # Set font color
 STEPS="[\033[95m STEPS \033[0m]"
