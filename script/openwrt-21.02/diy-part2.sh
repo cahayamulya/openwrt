@@ -30,10 +30,6 @@ svn export https://github.com/lynxnexy/openwrt/trunk/include/common-files/rootfs
 # Set shell zsh
 sed -i "s/\/bin\/ash/\/usr\/bin\/zsh/g" package/base-files/files/etc/passwd
 
-# Add luci-app-openclash
-rm -rf feeds/luci/applications/luci-app-openclash
-svn co https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash package/luci-app-openclash
-
 # Set clash-core
 mkdir -p files/etc/openclash/core
 # VERNESONG_CORE=$(curl -sL https://api.github.com/repos/vernesong/OpenClash/releases/tags/Clash | grep /clash-linux-armv8 | awk -F '"' '{print $4}')
@@ -54,22 +50,6 @@ chmod +x files/etc/openclash/core/clash*
 mkdir -p files/etc/openclash
 curl -sL https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat -o files/etc/openclash/GeoSite.dat
 curl -sL https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat -o files/etc/openclash/GeoIP.dat
-
-# Set config editor
-cat << EOF > package/luci-app-openclash/luasrc/view/openclash/editor.htm
-<%+header%>
-<div class="cbi-map">
-<iframe id="editor" style="width: 100%; min-height: 100vh; border: none; border-radius: 2px;"></iframe>
-</div>
-<script type="text/javascript">
-document.getElementById("editor").src = "http://" + window.location.hostname + "/tinyfilemanager/index.php?p=etc/openclash";
-</script>
-<%+footer%>
-EOF
-
-sed -i "s/yacd/Yet Another Clash Dashboard/g" package/luci-app-openclash/root/usr/share/openclash/ui/yacd/manifest.webmanifest
-sed -i '94s/80/90/g' package/luci-app-openclash/luasrc/controller/openclash.lua
-sed -i '94 i\	entry({"admin", "services", "openclash", "editor"}, template("openclash/editor"),_("Config Editor"), 80).leaf = true' package/luci-app-openclash/luasrc/controller/openclash.lua
 
 # Set speedtest
 mkdir -p files/bin
