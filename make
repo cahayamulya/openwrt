@@ -22,7 +22,7 @@ script_repo="https://github.com/lynxnexy/packages/tree/main/luci-app-amlogic/roo
 # Kernel files download repository
 kernel_repo="https://github.com/ophub/kernel/tree/main/pub"
 version_branch="stable"
-auto_kernel="true"
+auto_kernel="false"
 build_kernel=("5.15.1" "6.0.1")
 # Set supported SoC
 build_openwrt=(
