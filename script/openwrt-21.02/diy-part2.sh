@@ -30,6 +30,46 @@ svn export https://github.com/lynxnexy/openwrt/trunk/include/common-files/rootfs
 # Set shell zsh
 sed -i "s/\/bin\/ash/\/usr\/bin\/zsh/g" package/base-files/files/etc/passwd
 
+# Set php7 max_size
+sed -i -e "s/upload_max_filesize = 2M/upload_max_filesize = 1024M/g" -e "s/post_max_size = 8M/post_max_size = 1024M/g" feeds/packages/lang/php7/files/php.ini
+
+# Add luci-theme-tano (default themes)
+svn co https://github.com/lynxnexy/packages/trunk/luci-theme-tano package/luci-theme-tano
+sed -i "s/+luci-theme-bootstrap //" feeds/luci/collections/luci/Makefile
+
+# Add luci-app-3ginfo
+svn co https://github.com/lynxnexy/packages/trunk/3ginfo package/3ginfo
+svn co https://github.com/lynxnexy/packages/trunk/luci-app-3ginfo package/luci-app-3ginfo
+
+# Add luci-app-atinout-mod
+svn co https://github.com/lynxnexy/packages/trunk/atinout package/atinout
+svn co https://github.com/lynxnexy/packages/trunk/luci-app-atinout-mod package/luci-app-atinout-mod
+
+# Add luci-app-amlogic
+svn co https://github.com/lynxnexy/packages/trunk/luci-app-amlogic package/luci-app-amlogic
+
+# Add luci-app-tinyfilemanager
+svn co https://github.com/lynxnexy/packages/trunk/luci-app-tinyfilemanager package/luci-app-tinyfilemanager
+
+# Add p7zip
+svn co https://github.com/hubutui/p7zip-lede/trunk package/p7zip
+
+# Add luci-app-adguardhome
+# svn co https://github.com/rufengsuixing/luci-app-adguardhome/trunk package/luci-app-adguardhome
+
+# Set adguardhome-core
+# mkdir -p files/usr/bin/AdGuardHome
+# AGH_CORE=$(curl -sL https://api.github.com/repos/AdguardTeam/AdGuardHome/releases | grep /AdGuardHome_linux_arm64 | awk -F '"' '{print $4}' | sed -n '1p')
+# wget -qO- $AGH_CORE | tar xOvz > files/usr/bin/AdGuardHome/AdGuardHome
+# chmod +x files/usr/bin/AdGuardHome/AdGuardHome
+
+# Add luci-app-openclash
+rm -rf feeds/luci/applications/luci-app-openclash
+svn co https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash package/luci-app-openclash
+# pushd package/luci-app-openclash/tools/po2lmo
+# make && sudo make install
+# popd
+
 # Set clash-core
 mkdir -p files/etc/openclash/core
 # VERNESONG_CORE=$(curl -sL https://api.github.com/repos/vernesong/OpenClash/releases/tags/Clash | grep /clash-linux-armv8 | awk -F '"' '{print $4}')
@@ -50,6 +90,27 @@ chmod +x files/etc/openclash/core/clash*
 mkdir -p files/etc/openclash
 curl -sL https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat -o files/etc/openclash/GeoSite.dat
 curl -sL https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat -o files/etc/openclash/GeoIP.dat
+
+# Set config editor
+cat << EOF > package/luci-app-openclash/luasrc/view/openclash/editor.htm
+<%+header%>
+<div class="cbi-map">
+<iframe id="editor" style="width: 100%; min-height: 100vh; border: none; border-radius: 2px;"></iframe>
+</div>
+<script type="text/javascript">
+document.getElementById("editor").src = "http://" + window.location.hostname + "/tinyfilemanager/index.php?p=etc/openclash";
+</script>
+<%+footer%>
+EOF
+
+sed -i "s/yacd/Yet Another Clash Dashboard/g" package/luci-app-openclash/root/usr/share/openclash/ui/yacd/manifest.webmanifest
+sed -i '94s/80/90/g' package/luci-app-openclash/luasrc/controller/openclash.lua
+sed -i '94 i\	entry({"admin", "services", "openclash", "editor"}, template("openclash/editor"),_("Config Editor"), 80).leaf = true' package/luci-app-openclash/luasrc/controller/openclash.lua
+
+# Set yt-dlp
+# mkdir -p files/bin
+# curl -sL https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o files/bin/yt-dlp
+# chmod +x files/bin/yt-dlp
 
 # Set speedtest
 mkdir -p files/bin
