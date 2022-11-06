@@ -23,7 +23,7 @@ script_repo="https://github.com/lynxnexy/packages/tree/main/luci-app-amlogic/roo
 kernel_repo="https://github.com/ophub/kernel/tree/main/pub"
 version_branch="stable"
 auto_kernel="true"
-build_kernel=("5.15.76" "6.0.6")
+build_kernel=("5.15.1" "6.0.1")
 # Set supported SoC
 build_openwrt=(
     "hg680p"
@@ -32,7 +32,7 @@ build_openwrt=(
 # Set OpenWrt firmware size (Unit: MiB, SKIP_MB >= 4, BOOT_MB >= 256, ROOT_MB >= 512)
 SKIP_MB="68"
 BOOT_MB="256"
-ROOT_MB="1536"
+ROOT_MB="1024"
 #
 # Set font color
 STEPS="[\033[95m STEPS \033[0m]"
