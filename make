@@ -455,7 +455,7 @@ EOF
     # Realtek RTL8821CU USB Wireless LAN Driver
     echo "8821cu" >etc/modules.d/8821cu
     # Realtek RTL8822CS Wireless LAN Driver
-    echo "88x2cs" >etc/modules.d/88x2cs
+    # echo "88x2cs" >etc/modules.d/88x2cs
     # USB Ralink Wireless LAN Driver
     echo "rt2500usb" >etc/modules.d/rt2500-usb
     echo "rt2800usb" >etc/modules.d/rt2800-usb
