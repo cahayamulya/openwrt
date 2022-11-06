@@ -16,21 +16,21 @@ on:
       openwrt_kernel:
         description: "Select kernel version"
         required: false
-        default: "5.15.76_6.0.6"
+        default: "5.15.1_6.0.1"
         type: choice
         options:
-          - 5.15.76_6.0.6
-          - 5.15.76
-          - 6.0.6
+          - 5.15.1_6.0.1
+          - 5.15.1
+          - 6.0.1
       auto_kernel:
         description: "Auto use the latest kernel"
         required: false
-        default: true
+        default: false
         type: boolean
       openwrt_size:
         description: "Set the rootfs size(Unit: MiB)."
         required: false
-        default: "1536"
+        default: "1024"
 
 env:
   REPO_URL: https://github.com/immortalwrt/immortalwrt
